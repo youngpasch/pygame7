@@ -6,7 +6,7 @@ import pygame
 pygame.init()
 
 FPS = 50
-WIDTH = HEIGHT = 500
+WIDTH = HEIGHT = 600
 CELL = 50
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -68,23 +68,21 @@ class Player(pygame.sprite.Sprite):
         self.image = player_image
         self.rect = self.image.get_rect().move(
             tile_width * pos_x + 15, tile_height * pos_y + 5)
-        self.level = load_level('map.txt')
 
     def move(self, event):
         x, y = self.rect.x // CELL, self.rect.y // CELL
         if event.key == pygame.K_LEFT:
-            if x - 1 >= 0 and self.level[y][x - 1] != '#':
+            if x - 1 >= 0 and level[y][x - 1] != '#':
                 self.rect.x -= CELL
         if event.key == pygame.K_RIGHT:
-            if x + 1 < level_x and self.level[y][x + 1] != '#':
+            if x + 1 < level_x and level[y][x + 1] != '#':
                 self.rect.x += CELL
         if event.key == pygame.K_UP:
-            if y - 1 >= 0 and self.level[y - 1][x] != '#':
+            if y - 1 >= 0 and level[y - 1][x] != '#':
                 self.rect.y -= CELL
         if event.key == pygame.K_DOWN:
-            if y + 1 < level_y and self.level[y + 1][x] != "#":
+            if y + 1 < level_y and level[y + 1][x] != "#":
                 self.rect.y += CELL
-
 
 
 tile_images = {
@@ -146,9 +144,10 @@ def start_screen():
 
 
 running = True
-
+print("Введите номер карты от 1 до 3")
+level = load_level(input() + ".txt")
 start_screen()
-player, level_x, level_y = generate_level(load_level('map.txt'))
+player, level_x, level_y = generate_level(level)
 
 while running:
     for event in pygame.event.get():
