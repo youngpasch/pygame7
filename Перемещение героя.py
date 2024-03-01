@@ -6,7 +6,7 @@ import pygame
 pygame.init()
 
 FPS = 50
-WIDTH = HEIGHT = 600
+WIDTH = HEIGHT = 500
 CELL = 50
 
 screen = pygame.display.set_mode((WIDTH, HEIGHT))
@@ -83,6 +83,7 @@ class Player(pygame.sprite.Sprite):
         if event.key == pygame.K_DOWN:
             if y + 1 < level_y and level[y + 1][x] != "#":
                 self.rect.y += CELL
+
 
 
 tile_images = {
